@@ -303,42 +303,6 @@ bool minethd::self_test()
 			ctx[0]->hash_fn("\x54\x68\x69\x73\x20\x69\x73\x20\x61\x20\x74\x65\x73\x74\x20\x54\x68\x69\x73\x20\x69\x73\x20\x61\x20\x74\x65\x73\x74\x20\x54\x68\x69\x73\x20\x69\x73\x20\x61\x20\x74\x65\x73\x74", 44, out, ctx, algo);
 			bResult = bResult && memcmp(out, "\x82\xec\x9f\x7a\x8d\x40\x56\xd9\x71\xd0\x3e\xd9\x88\x78\x90\xad\xa4\x16\xa4\xe8\x28\xfd\x5f\x5e\x10\xbf\xdc\x6b\x83\x66\x64\xbb", 32) == 0;
 		}
-		else if(algo == POW(randomX_loki))
-		{
-			printer::inst()->print_msg(L0, "start self test for 'randomx_loki' (can be disabled with the command line option '--noTest')");
-			minethd::cn_on_new_job set_job;
-			func_multi_selector<1>(ctx, set_job, ::jconf::inst()->HaveHardwareAes(), algo);
-			miner_work work;
-			work.iBlockHeight = 1806260;
-			work.seed_hash[0] = 1;
-			set_job(work, ctx);
-			ctx[0]->hash_fn("\x54\x68\x69\x73\x20\x69\x73\x20\x61\x20\x74\x65\x73\x74\x20\x54\x68\x69\x73\x20\x69\x73\x20\x61\x20\x74\x65\x73\x74\x20\x54\x68\x69\x73\x20\x69\x73\x20\x61\x20\x74\x65\x73\x74", 44, out, ctx, algo);
-			bResult = bResult && memcmp(out, "\x6d\xab\x6a\x60\x56\xcd\x1c\xc5\xa4\x2e\x32\x29\x8d\x26\x61\xce\x8a\x9e\xed\xa2\x7b\xad\x89\xf4\xad\x7f\x3a\x49\xd4\xe0\x5e\x10", 32) == 0;
-		}
-		else if(algo == POW(randomX_wow))
-		{
-			printer::inst()->print_msg(L0, "start self test for 'randomx_wow' (can be disabled with the command line option '--noTest')");
-			minethd::cn_on_new_job set_job;
-			func_multi_selector<1>(ctx, set_job, ::jconf::inst()->HaveHardwareAes(), algo);
-			miner_work work;
-			work.iBlockHeight = 1806260;
-			work.seed_hash[0] = 1;
-			set_job(work, ctx);
-			ctx[0]->hash_fn("\x54\x68\x69\x73\x20\x69\x73\x20\x61\x20\x74\x65\x73\x74\x20\x54\x68\x69\x73\x20\x69\x73\x20\x61\x20\x74\x65\x73\x74\x20\x54\x68\x69\x73\x20\x69\x73\x20\x61\x20\x74\x65\x73\x74", 44, out, ctx, algo);
-			bResult = bResult && memcmp(out, "\xc7\x78\x25\x35\xd8\x11\xda\x56\x32\xb0\xa4\xb8\x9d\x9d\x1a\xdf\x7b\x9\x69\xae\x92\x4f\xd4\xd0\x4c\x6b\x55\x5e\x77\xe9\x8f\x38", 32) == 0;
-		}
-		else if(algo == POW(randomX_arqma))
-		{
-			printer::inst()->print_msg(L0, "start self test for 'randomx_arqma' (can be disabled with the command line option '--noTest')");
-			minethd::cn_on_new_job set_job;
-			func_multi_selector<1>(ctx, set_job, ::jconf::inst()->HaveHardwareAes(), algo);
-			miner_work work;
-			work.iBlockHeight = 1806260;
-			work.seed_hash[0] = 1;
-			set_job(work, ctx);
-			ctx[0]->hash_fn("\x54\x68\x69\x73\x20\x69\x73\x20\x61\x20\x74\x65\x73\x74\x20\x54\x68\x69\x73\x20\x69\x73\x20\x61\x20\x74\x65\x73\x74\x20\x54\x68\x69\x73\x20\x69\x73\x20\x61\x20\x74\x65\x73\x74", 44, out, ctx, algo);
-			bResult = bResult && memcmp(out, "\x96\xd5\x33\x16\x7f\x33\xeb\x37\xc7\xc5\x44\xae\xc8\x55\x96\x62\x09\x59\xc1\xfe\xb8\xca\x5c\x40\x37\x06\x07\x64\x60\xab\x86\xec", 32) == 0;
-		}
 		else
 		{
 			printer::inst()->print_msg(L0,
@@ -459,21 +423,6 @@ void minethd::func_multi_selector(cryptonight_ctx** ctx, minethd::cn_on_new_job&
 	case randomX:
 		algv = 0;
 		break;
-	case randomX_loki:
-		algv = 1;
-		break;
-	case randomX_wow:
-		algv = 2;
-		break;
-	case randomX_arqma:
-		algv = 3;
-		break;
-	case randomX_safex:
-		algv = 4;
-		break;
-	case randomX_keva:
-		algv = 5;
-		break;
 	default:
 		algv = 0;
 		break;
@@ -482,27 +431,7 @@ void minethd::func_multi_selector(cryptonight_ctx** ctx, minethd::cn_on_new_job&
 	static const cn_hash_fun func_table[] = {
 		//randomx
 		RandomX_hash<N>::template hash<randomX, false>,
-		RandomX_hash<N>::template hash<randomX, true>,
-
-		// loki
-		RandomX_hash<N>::template hash<randomX_loki, false>,
-		RandomX_hash<N>::template hash<randomX_loki, true>,
-
-		//wow
-		RandomX_hash<N>::template hash<randomX_wow, false>,
-		RandomX_hash<N>::template hash<randomX_wow, true>,
-
-		//arqma
-		RandomX_hash<N>::template hash<randomX_arqma, false>,
-		RandomX_hash<N>::template hash<randomX_arqma, true>,
-
-		//safex
-		RandomX_hash<N>::template hash<randomX_safex, false>,
-		RandomX_hash<N>::template hash<randomX_safex, true>,
-
-		//keva
-		RandomX_hash<N>::template hash<randomX_keva, false>,
-		RandomX_hash<N>::template hash<randomX_keva, true>
+		RandomX_hash<N>::template hash<randomX, true>
 	};
 
 	std::bitset<1> digit;
@@ -514,12 +443,7 @@ void minethd::func_multi_selector(cryptonight_ctx** ctx, minethd::cn_on_new_job&
 		ctx[h]->hash_fn = ctx[0]->hash_fn;
 
 	static const std::unordered_map<uint32_t, minethd::cn_on_new_job> on_new_job_map = {
-		{randomX, RandomX_generator<N>::template cn_on_new_job<randomX>},
-		{randomX_loki, RandomX_generator<N>::template cn_on_new_job<randomX_loki>},
-		{randomX_wow, RandomX_generator<N>::template cn_on_new_job<randomX_wow>},
-		{randomX_arqma, RandomX_generator<N>::template cn_on_new_job<randomX_arqma>},
-		{randomX_safex, RandomX_generator<N>::template cn_on_new_job<randomX_safex>},
-		{randomX_keva, RandomX_generator<N>::template cn_on_new_job<randomX_keva>}
+		{randomX, RandomX_generator<N>::template cn_on_new_job<randomX>}
 	};
 
 	auto it = on_new_job_map.find(algo.Id());

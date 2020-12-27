@@ -857,14 +857,8 @@ size_t InitOpenCLGpu(cl_context opencl_ctx, GpuContext* ctx, const char* source_
 			};
 
 			const RandomX_ConfigurationBase* rx_conf;
-			if(miner_algo == randomX_loki)
-				rx_conf = &RandomX_LokiConfig;
-			else if(miner_algo == randomX_wow)
-				rx_conf = &RandomX_WowneroConfig;
-			else if(miner_algo == randomX)
+			if(miner_algo == randomX)
 				rx_conf = &RandomX_MoneroConfig;
-			else if(miner_algo == randomX_arqma)
-				rx_conf = &RandomX_ArqmaConfig;
 
 			const uint32_t rx_parameters =
 				(PowerOf2(rx_conf->ScratchpadL1_Size) << 0) |
@@ -1180,17 +1174,8 @@ size_t InitOpenCL(GpuContext* ctx, size_t num_gpus, size_t platform_idx)
 
 	std::string source_code;
 
-	const char* randomx_constants_wow_h =
-		#include "./opencl/RandomX/randomx_constants_wow.h"
-	;
-	const char* randomx_constants_loki_h =
-		#include "./opencl/RandomX/randomx_constants_loki.h"
-	;
 	const char* randomx_constants_monero_h =
 		#include "./opencl/RandomX/randomx_constants_monero.h"
-	;
-	const char* randomx_constants_arqma_h =
-		#include "./opencl/RandomX/randomx_constants_arqma.h"
 	;
 	const char* aesCL =
 		#include "./opencl/RandomX/aes.cl"
@@ -1211,14 +1196,8 @@ size_t InitOpenCL(GpuContext* ctx, size_t num_gpus, size_t platform_idx)
 		#include "./opencl/RandomX/randomx_jit.cl"
 	;
 
-	if(user_algo == randomX_wow)
-		source_code.append(randomx_constants_wow_h);
-	else if(user_algo == randomX_loki)
-		source_code.append(randomx_constants_loki_h);
-	else if(user_algo == randomX)
+	if(user_algo == randomX)
 		source_code.append(randomx_constants_monero_h);
-	else if(user_algo == randomX_arqma)
-		source_code.append(randomx_constants_arqma_h);
 
 	source_code.append(std::regex_replace(aesCL, std::regex("#include \"fillAes1Rx4.cl\""), fillAes1Rx4CL));
 	source_code.append(std::regex_replace(blake2bCL, std::regex("#include \"blake2b_double_block.cl\""), blake2b_double_blockCL));

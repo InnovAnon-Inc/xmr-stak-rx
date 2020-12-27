@@ -290,18 +290,6 @@ void minethd::work_main()
 			{
 				RandomX_Monero::hash(&ctx, iNonce, oWork.iTarget, &foundCount, foundNonce, h_per_round);
 			}
-			else if(miner_algo == randomX_wow)
-			{
-				RandomX_Wownero::hash(&ctx, iNonce, oWork.iTarget, &foundCount, foundNonce, h_per_round);
-			}
-			else if(miner_algo == randomX_loki)
-			{
-				RandomX_Loki::hash(&ctx, iNonce, oWork.iTarget, &foundCount, foundNonce, h_per_round);
-			}
-			else if(miner_algo == randomX_arqma)
-			{
-				RandomX_Arqma::hash(&ctx, iNonce, oWork.iTarget, &foundCount, foundNonce, h_per_round);
-			}
 
 
 

@@ -44,67 +44,6 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include <cassert>
 
-RandomX_ConfigurationWownero::RandomX_ConfigurationWownero()
-{
-	ArgonSalt = "RandomWOW\x01";
-	ProgramIterations = 1024;
-	ProgramCount = 16;
-	ScratchpadL2_Size = 131072;
-	ScratchpadL3_Size = 1048576;
-
-	RANDOMX_FREQ_IADD_RS = 25;
-	RANDOMX_FREQ_IROR_R = 10;
-	RANDOMX_FREQ_IROL_R = 0;
-	RANDOMX_FREQ_FSWAP_R = 8;
-	RANDOMX_FREQ_FADD_R = 20;
-	RANDOMX_FREQ_FSUB_R = 20;
-	RANDOMX_FREQ_FMUL_R = 20;
-	RANDOMX_FREQ_CBRANCH = 16;
-
-	fillAes4Rx4_Key[0] = rx_set_int_vec_i128(0xcf359e95, 0x141f82b7, 0x7ffbe4a6, 0xf890465d);
-	fillAes4Rx4_Key[1] = rx_set_int_vec_i128(0x6741ffdc, 0xbd5c5ac3, 0xfee8278a, 0x6a55c450);
-	fillAes4Rx4_Key[2] = rx_set_int_vec_i128(0x3d324aac, 0xa7279ad2, 0xd524fde4, 0x114c47a4);
-	fillAes4Rx4_Key[3] = rx_set_int_vec_i128(0x76f6db08, 0x42d3dbd9, 0x99a9aeff, 0x810c3a2a);
-	fillAes4Rx4_Key[4] = fillAes4Rx4_Key[0];
-	fillAes4Rx4_Key[5] = fillAes4Rx4_Key[1];
-	fillAes4Rx4_Key[6] = fillAes4Rx4_Key[2];
-	fillAes4Rx4_Key[7] = fillAes4Rx4_Key[3];
-}
-
-RandomX_ConfigurationLoki::RandomX_ConfigurationLoki()
-{
-	ArgonIterations = 4;
-	ArgonLanes = 2;
-	ArgonSalt = "RandomXL\x12";
-	ProgramSize = 320;
-	ProgramCount = 7;
-
-	RANDOMX_FREQ_IADD_RS = 25;
-	RANDOMX_FREQ_CBRANCH = 16;
-}
-
-RandomX_ConfigurationArqma::RandomX_ConfigurationArqma()
-{
-	ArgonIterations = 1;
-	ArgonSalt = "RandomARQ\x01";
-	ProgramIterations = 1024;
-	ProgramCount = 4;
-	ScratchpadL2_Size = 131072;
-	ScratchpadL3_Size = 262144;
-}
-
-RandomX_ConfigurationSafex::RandomX_ConfigurationSafex()
-{
-	ArgonSalt = "RandomSFX\x01";
-}
-
-RandomX_ConfigurationKeva::RandomX_ConfigurationKeva()
-{
-	ArgonSalt = "RandomKV\x01";
-	ScratchpadL2_Size = 131072;
-	ScratchpadL3_Size = 1048576;
-}
-
 RandomX_ConfigurationBase::RandomX_ConfigurationBase()
 	: ArgonMemory(262144)
 	, ArgonIterations(3)
@@ -302,11 +241,6 @@ void RandomX_ConfigurationBase::Apply()
 }
 
 RandomX_ConfigurationMonero RandomX_MoneroConfig;
-RandomX_ConfigurationWownero RandomX_WowneroConfig;
-RandomX_ConfigurationLoki RandomX_LokiConfig;
-RandomX_ConfigurationArqma RandomX_ArqmaConfig;
-RandomX_ConfigurationSafex RandomX_SafexConfig;
-RandomX_ConfigurationKeva RandomX_KevaConfig;
 
 alignas(64) RandomX_ConfigurationBase RandomX_CurrentConfig;
 

@@ -106,8 +106,6 @@ void *xmrstak::VirtualMemory::allocateLargePagesMemory(size_t size, size_t page_
 #   elif defined(__FreeBSD__)
     void *mem = mmap(0, size, PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANONYMOUS | MAP_ALIGNED_SUPER | MAP_PREFAULT_READ, -1, 0);
 #   else
-	constexpr int MAP_HUGE_2MB = (21 << MAP_HUGE_SHIFT);
-	constexpr int MAP_HUGE_1GB = (30 << MAP_HUGE_SHIFT);
 
 	int page_size_flags = 0;
 	if(page_size == 2u)

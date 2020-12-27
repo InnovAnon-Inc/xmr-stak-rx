@@ -10,13 +10,7 @@ constexpr size_t start_derived_algo_id = 1000;
 enum xmrstak_algo_id
 {
 	invalid_algo = 0,
-	randomX = 1,
-	randomX_loki = 2,
-	randomX_wow = 3,
-	randomX_arqma = 4,
-	randomX_safex = 5,
-	randomX_keva = 6
-	
+	randomX = 1
 	//cryptonight_turtle = start_derived_algo_id,
 	// please add the algorithm name to get_algo_name()
 };
@@ -27,15 +21,10 @@ enum xmrstak_algo_id
  */
 inline std::string get_algo_name(xmrstak_algo_id algo_id)
 {
-	static std::array<std::string, 7> base_algo_names =
+	static std::array<std::string, 2> base_algo_names =
 		{{
 			"invalid_algo",
-			"randomx",
-			"randomx_loki",
-			"randomx_wow",
-			"randomx_arqma",
-			"randomx_safex",
-			"randomx_keva"
+			"randomx"
 		}};
 
 	static std::array<std::string, 0> derived_algo_names =
@@ -140,18 +129,13 @@ constexpr size_t _2MiB = 2 * 1024 * 1024;
 constexpr size_t _256KiB = 256 * 1024;
 constexpr size_t _16KiB = 16 * 1024;
 
-constexpr uint32_t RX_ARQMA_ITER = 0x10000;
+//constexpr uint32_t RX_ARQMA_ITER = 0x10000;
 
 inline xmrstak_algo POW(xmrstak_algo_id algo_id)
 {
-	static std::array<xmrstak_algo, 7> pow = {{
+	static std::array<xmrstak_algo, 2> pow = {{
 		{invalid_algo},
-		{randomX, randomX, _2MiB, _256KiB, _16KiB},
-		{randomX_loki, randomX_loki, _2MiB, _256KiB, _16KiB},
-		{randomX_wow, randomX_wow, _2MiB/2, _256KiB/2, _16KiB},
-		{randomX_arqma, randomX_arqma, _2MiB/8, _256KiB/2, _16KiB},
-		{randomX_safex, randomX_safex, _2MiB, _256KiB, _16KiB},
-		{randomX_keva, randomX_keva, _2MiB/4, _256KiB/2, _16KiB}
+		{randomX, randomX, _2MiB, _256KiB, _16KiB}
 	}};
 
 	return pow[algo_id];
