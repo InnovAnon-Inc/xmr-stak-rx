@@ -430,8 +430,8 @@ if(CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
     add_definitions(-DNOMINMAX)
 else()
     # activate sse2 and aes-ni
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -msse2 -maes")
-    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -msse2 -maes")
+    #set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -msse2 -maes")
+    #set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -msse2 -maes")
 endif()
 
 # add -Wall for debug builds with gcc
